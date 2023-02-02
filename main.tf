@@ -16,7 +16,7 @@ provider "aws" {
 }
 
 locals {
-  setup_name = "tuts"
+  setup_name = "prefix"
 }
 
 resource "aws_vpc" "main" {
@@ -37,16 +37,12 @@ resource "aws_subnet" "web" {
   }
 }
 
-resource "aws_instance" "web" {
+resource "aws_instance" "server_web" {
   ami           = "ami-0333305f9719618c7"
   instance_type = var.my_instance_type 
 
   tags = {
-    Name = "${local.setup_name}-ExampleFromTerraform"
+    Name = "${local.setup_name}-ExampleFromTF"
   }
-}
-
-output "intance_ip" {
-  value = aws_instance.web.public_ip
 }
 
