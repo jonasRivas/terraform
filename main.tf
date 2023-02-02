@@ -37,12 +37,16 @@ resource "aws_subnet" "web" {
   }
 }
 
-resource "aws_instance" "app_server" {
+resource "aws_instance" "web" {
   ami           = "ami-0333305f9719618c7"
   instance_type = var.my_instance_type 
 
   tags = {
     Name = "${local.setup_name}-ExampleFromTerraform"
   }
+}
+
+output "intance_ip" {
+  value = aws_instance.web.public_ip
 }
 
